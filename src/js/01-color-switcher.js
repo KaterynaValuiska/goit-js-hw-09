@@ -17,7 +17,7 @@ function onClickBtnStart(event) {
             clearInterval(intervalId);
         }
      bodyEl.style.backgroundColor = getRandomHexColor();    
-}, 1000)
+}, 2000)
 }
  
 function onClickBtnStop(event) {
