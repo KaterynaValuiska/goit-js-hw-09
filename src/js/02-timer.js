@@ -27,14 +27,14 @@ const options = {
   },
 };
 
-flatpickr(inputEl, { options });
+flatpickr(inputEl,  options );
 
 const dateNow = Date.now();
 
 
 function onSelectDate(event) {
     selectedDates = new Date(inputEl.value).getTime();
-    
+    console.log(selectedDates);
     if (dateNow > selectedDates) {
         Notiflix.Notify.failure('Please choose a date in the future');
         // alert("Please choose a date in the future");
@@ -52,8 +52,8 @@ const timer = {
             const currentTime = Date.now();
             const deltaTime = (selectedDates - currentTime);
             if (deltaTime === 0) {
+             clearInterval(intervalTimer);   
                 return;
-            clearInterval(intervalTimer);
             }
             const { days, hours, minutes, seconds } = convertMs(deltaTime);
             dayEl.textContent = days;
