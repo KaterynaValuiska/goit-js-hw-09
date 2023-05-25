@@ -50,7 +50,7 @@ const timer = {
             minutEl.textContent = minutes;
             secondEl.textContent = seconds;
 
-            if (deltaTime < 100) {
+            if (deltaTime < 999) {
              clearInterval(intervalTimer);   
                 return;
             }
