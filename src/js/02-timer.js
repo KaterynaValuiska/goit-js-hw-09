@@ -41,8 +41,6 @@ const timer = {
         const intervalTimer = setInterval(() => {
             const currentTime = Date.now();
             const deltaTime = (dataPicer.selectedDates[0] - currentTime);
-            console.log(deltaTime);
-            console.log(currentTime);
 
             const { days, hours, minutes, seconds } = convertMs(deltaTime);
             dayEl.textContent = days;
@@ -51,7 +49,7 @@ const timer = {
             secondEl.textContent = seconds;
 
             if (deltaTime < 999) {
-             clearInterval(intervalTimer);   
+                clearInterval(intervalTimer); 
                 return;
             }
             
