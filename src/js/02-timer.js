@@ -12,7 +12,6 @@ const secondEl = document.querySelector('[data-seconds]');
 btnEl.style.fontSize = "20px";
 inputEl.style.fontSize = "20px";
 
-inputEl.addEventListener('input', onSelectDate);
 btnEl.addEventListener('click', onClickBtnStartTimer);
 
 btnEl.setAttribute('disabled', '');
@@ -23,43 +22,39 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
-  },
-};
-
-flatpickr(inputEl,  options );
-
-const dateNow = Date.now();
-
-
-function onSelectDate(event) {
-    selectedDates = new Date(inputEl.value).getTime();
-    console.log(selectedDates);
-    if (dateNow > selectedDates) {
+      console.log(selectedDates[0]);
+      if (dateNow > selectedDates[0]) {
         Notiflix.Notify.failure('Please choose a date in the future');
         // alert("Please choose a date in the future");
         return; 
     }
-
     btnEl.removeAttribute('disabled');
-}
+  },
+};
 
+const dataPicer = flatpickr(inputEl,  options );
+const dateNow = Date.now();
 
 function onClickBtnStartTimer(event) {
 const timer = {
     start() {
         const intervalTimer = setInterval(() => {
             const currentTime = Date.now();
-            const deltaTime = (selectedDates - currentTime);
-            if (deltaTime === 0) {
-             clearInterval(intervalTimer);   
-                return;
-            }
+            const deltaTime = (dataPicer.selectedDates[0] - currentTime);
+            console.log(deltaTime);
+            console.log(currentTime);
+
             const { days, hours, minutes, seconds } = convertMs(deltaTime);
             dayEl.textContent = days;
             hourEl.textContent = hours;
             minutEl.textContent = minutes;
             secondEl.textContent = seconds;
+
+            if (deltaTime < 100) {
+             clearInterval(intervalTimer);   
+                return;
+            }
+            
 
         }, 1000);
     }

@@ -5,17 +5,22 @@ const bodyEl = document.querySelector('body');
 btnStart.addEventListener('click', onClickBtnStart);
 btnStop.addEventListener('click', onClickBtnStop);
 
+let intervalId = null;
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
 }
 
+
 function onClickBtnStart() {
-    btnStart.setAttribute('disabled', '');
-    bodyEl.style.backgroundColor = getRandomHexColor();
+    intervalId = setInterval(() => {
+       btnStart.setAttribute('disabled', '');
+    bodyEl.style.backgroundColor = getRandomHexColor(); 
+    }, 1000);
+    
 }
 
-const intervalId = setInterval(onClickBtnStart, 1000);
+
 
 function onClickBtnStop(event) {
     btnStart.removeAttribute('disabled');
