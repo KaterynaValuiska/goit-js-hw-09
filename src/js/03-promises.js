@@ -23,21 +23,19 @@ function createPromise(position, delay) {
 
 function onSubmitForm(event) {
   event.preventDefault();
+  let delay = Number(event.target.elements.delay.value);
+  const step = Number(event.target.elements.step.value);
+  const amount = Number(event.target.elements.amount.value);
 
-  const { delay, step, amount } = event.target.elements;
-
-  for (let i = 0; i < amount.value; i++) {
-      position = i + 1;
-    createPromise(position, delay)
+  for (let i = 1; i < amount; i++) {
+    createPromise(i, delay)
       .then(({ position, delay }) => {
-    del = Number(delay.value) + i * Number(step.value);
-    Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${del}ms`);
+    Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
   })
-      .catch(({ position, delay }) => {
-    del = Number(delay.value) + i * Number(step.value);
-    Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${del}ms`);
+      .catch(({ position, delay }) => { 
+    Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
   });
-    
+    delay += step;
   }
 }
 
