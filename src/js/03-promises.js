@@ -3,7 +3,7 @@ const formEl = document.querySelector('.form');
 
 formEl.addEventListener('submit', onSubmitForm);
 
-
+let del = 0;
 function createPromise(position, delay) {
   
   return new Promise((resolve, reject) => {
@@ -27,7 +27,8 @@ function onSubmitForm(event) {
   const { delay, step, amount } = event.target.elements;
 
   for (let i = 0; i < amount.value; i++) {
-    position = i + 1;
+
+      position = i + 1;
     createPromise(position, delay)
       .then(({ position, delay }) => {
     del = Number(delay.value) + i * Number(step.value);
