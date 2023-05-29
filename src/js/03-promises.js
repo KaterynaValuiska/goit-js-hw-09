@@ -6,7 +6,7 @@ const formEl = document.querySelector('.form');
 formEl.addEventListener('submit', createPromise);
 
 const delay = 2000;
-const STEP = 1000;
+const STEP = 500;
 const amount = 6;
 
 let position = 0;
