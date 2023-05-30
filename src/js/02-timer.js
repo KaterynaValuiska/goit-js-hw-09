@@ -49,7 +49,8 @@ const timer = {
             secondEl.textContent = seconds;
 
             if (deltaTime < 999) {
-                clearInterval(intervalTimer); 
+              clearInterval(intervalTimer); 
+              inputEl.removeAttribute('disabled');
                 return;
             }
             
@@ -57,7 +58,9 @@ const timer = {
         }, 1000);
     }
 }
-timer.start()
+  timer.start()
+  btnEl.setAttribute('disabled', '');
+  inputEl.setAttribute('disabled', '');
 }
 
 function convertMs(ms) {
